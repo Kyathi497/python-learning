@@ -48,28 +48,72 @@
 # print(f"Total unique students :{len(attend_as_one)}")
 
 # Problem 3 — Dictionary deep dive
-students = {
-    "Ravi"  : {"age": 22, "scores": [85, 90, 78]},
-    "Priya" : {"age": 21, "scores": [92, 88, 95]},
-    "Arjun" : {"age": 23, "scores": [70, 65, 80]},
-    "Sneha" : {"age": 22, "scores": [45, 55, 60]},
-    "Kiran" : {"age": 24, "scores": [88, 91, 85]},
+# students = {
+#     "Ravi"  : {"age": 22, "scores": [85, 90, 78]},
+#     "Priya" : {"age": 21, "scores": [92, 88, 95]},
+#     "Arjun" : {"age": 23, "scores": [70, 65, 80]},
+#     "Sneha" : {"age": 22, "scores": [45, 55, 60]},
+#     "Kiran" : {"age": 24, "scores": [88, 91, 85]},
+# }
+
+# topper_name = ""
+# topper_score = 0
+
+# print(f"{'Name': <8} {'Avg': <8} {"Grade"}")
+# print("─" * 22)
+
+# for name, info in students.items():
+#     avg = round((sum(info['scores'])/len(info['scores'])),2)
+#     if avg > 85:
+#         grade = "A"
+#     elif 75 <= avg < 85:
+#         grade = "B"
+#     elif 60 <= avg <= 74:
+#         grade = "C"
+#     else:
+#         grade = "F"
+
+#     info["grade"]=grade
+
+#     if avg > topper_score:
+#         topper_name = name
+#         topper_score = avg
+    
+#     print(f"{name} {avg} {grade}")
+
+# print(f"Topper: {topper_name} with {topper_score}")
+
+
+# Problem 4 — Bring it all together
+
+inventory = {
+    "apple"  : {"price": 40,  "stock": 100},
+    "banana" : {"price": 20,  "stock": 150},
+    "mango"  : {"price": 80,  "stock": 60},
+    "grapes" : {"price": 120, "stock": 30},
+    "orange" : {"price": 50,  "stock": 0},
 }
 
-new_dictonary = {}
-for names, info in students.items():
-    avg = (sum(info['scores'])/len(info['scores']))
-    if avg > 85:
-        grade = "A"
-    elif 75 <= avg < 85:
-        grade = "B"
-    elif 60 <= avg <= 74:
-        grade = "C"
-    else:
-        grade = "F"
+out_of_stock = []
+below_50_stock = []
 
-    new_dictonary.update({"Name": {names}, "Avg": {avg}, "grade": {grade},})
+increase_price = {}
+
+for fruit, info in inventory.items():
+    if info["stock"] == 0:
+        out_of_stock.append(fruit)
     
-    print(f"{names} {avg} {grade}")
+    if info["stock"] <50 and info["stock"] >0:
+        below_50_stock.append(fruit)
+    
+print(f"Out of stock : {out_of_stock}")
+print(f"Low stock : {below_50_stock}")
+print(f"After 10% price increase:")
+for fruit, info in inventory.items():
 
+    if(info["price"] >60):
+        info["price"] = round(info["price"]*1.10,1)
+        print(f" {fruit:<8}: ₹{info["price"]}")
 
+total_value = sum(info["price"]*info["stock"] for info in inventory.values())
+print(f"\nTotal inventory value: ₹{total_value:,.1f}")
