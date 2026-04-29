@@ -82,13 +82,36 @@ from pathlib import Path
 #     writer = csv.writer(f)
 #     writer.writerows(students)    # write all rows at once
 
+# Reading csv
+# import csv
+
+# with open("students.csv", "r") as f:
+#     reader = csv.reader(f)
+#     header = next(reader)         # skip the header row
+#     print(f"Columns: {header}")
+
+#     for row in reader:
+#         print(f"{row[0]} scored {row[2]}")
+
+# DictReader - rows as dictionaries(much cleaner)
+# import csv
+
+# with open('students.csv', "r") as file:
+#     reader = csv.DictReader(file)
+
+#     for row in reader:
+#         print(row["Name"], row["Age"], row["Score"])
 
 import csv
 
-with open("students.csv", "r") as f:
-    reader = csv.reader(f)
-    header = next(reader)         # skip the header row
-    print(f"Columns: {header}")
+students = [
+    {"name": "Ravi", "age": 22, "city": "Hyderabad"},
+    {"name": "Priya", "age": 21, "city": "Chennai"},
+]
 
-    for row in reader:
-        print(f"{row[0]} scored {row[2]}")
+with open("check-student.csv", "w", newline="") as file:
+    fieldnames = ["name", "age", "city"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+    writer.writeheader()
+    writer.writerows(students)

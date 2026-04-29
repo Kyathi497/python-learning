@@ -1,0 +1,6 @@
+Python is awesome
+File handling is useful
+I am learning Week 5
+Data persists beyond the program
+Hyderabad is my city
+keep going, don't stop!
